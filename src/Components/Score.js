@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 
 class Score extends Component {
     render(){
-        let score = 100
         return (<div>
-            {score}
+            {this.props.score}
         </div>)
     }
 }

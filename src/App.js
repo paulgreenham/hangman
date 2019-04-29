@@ -8,7 +8,39 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      letterStatus: {}
+      letterStatus: {
+        A: false,
+        B: false,
+        C: false,
+        D: false,
+        E: true,
+        F: false,
+        G: false,
+        H: false,
+        I: false,
+        J: false,
+        K: false,
+        L: false,
+        M: false,
+        N: false,
+        O: false,
+        P: false,
+        Q: false,
+        R: false,
+        S: true,
+        T: false,
+        U: false,
+        V: false,
+        W: false,
+        X: false,
+        Y: true,
+        Z: false
+      },
+      solution: {
+        word: "BYTES",
+        hint: "testing"
+      },
+      score: 100
     }
   }
 
@@ -22,12 +54,11 @@ class App extends Component {
 
   return (
       <div>
-        <Score />
-        <Solution />
+        {/* {this.generateLetterStatuses()} */}
+        <Score score={this.state.score}/>
+        <Solution letterStatus={this.state.letterStatus} solution={this.state.solution}/>
         <hr/>
-        <Letters />
-        {this.generateLetterStatuses()}
-        {Object.keys(this.state.letterStatus)}
+        <Letters letterStatus={this.state.letterStatus}/>
       </div>
     )
   }

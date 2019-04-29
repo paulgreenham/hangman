@@ -3,14 +3,11 @@ import Letter from './Letter'
 
 class Letters extends Component {
     render(){
-        let availLetters = [<Letter />]
         return (<div>
             <div>Available Letters</div>
-            {availLetters}
+            {Object.keys(this.props.letterStatus).map(l => <Letter value={l} crossedOut={this.props.letterStatus[l]}/>)}
         </div>)
     }
 }
 
 export default Letters
-
-//            {availLetters.map(l => {return (<span>l</span>)})}
