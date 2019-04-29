@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import Solution from './Components/Solution'
+import Score from './Components/Score'
+import Letters from './Components/Letters'
 
-function App() {
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      letterStatus: {}
+    }
+  }
+
+  generateLetterStatuses() {
+    for (let i = 65; i < 91; i ++) {
+      this.state.letterStatus[String.fromCharCode(i)] = false
+    }
+  }
+
+  render() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div>
+        <Score />
+        <Solution />
+        <hr/>
+        <Letters />
+        {this.generateLetterStatuses()}
+        {Object.keys(this.state.letterStatus)}
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
