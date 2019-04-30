@@ -5,7 +5,9 @@ class Letters extends Component {
     render(){
         return (<div>
             <div>Available Letters</div>
-            {Object.keys(this.props.letterStatus).map(l => <Letter value={l} crossedOut={this.props.letterStatus[l]}/>)}
+            {Object.keys(this.props.letterStatus).map(l => 
+            <Letter value={l} key={l} crossedOut={this.props.letterStatus[l]} selectLetter={this.props.selectLetter}/>
+            )}
         </div>)
     }
 }

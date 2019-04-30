@@ -8,57 +8,40 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      letterStatus: {
-        A: false,
-        B: false,
-        C: false,
-        D: false,
-        E: true,
-        F: false,
-        G: false,
-        H: false,
-        I: false,
-        J: false,
-        K: false,
-        L: false,
-        M: false,
-        N: false,
-        O: false,
-        P: false,
-        Q: false,
-        R: false,
-        S: true,
-        T: false,
-        U: false,
-        V: false,
-        W: false,
-        X: false,
-        Y: true,
-        Z: false
-      },
+      letterStatus: {},
       solution: {
-        word: "BYTES",
-        hint: "testing"
+        word: "CALM",
+        hint: "Your ideal mood when coding."
       },
       score: 100
     }
+    this.generateLetterStatuses()
   }
 
   generateLetterStatuses() {
+    let letters = {}
     for (let i = 65; i < 91; i ++) {
-      this.state.letterStatus[String.fromCharCode(i)] = false
+      letters[String.fromCharCode(i)] = false
     }
+    this.state.letterStatus = {...letters}
+  }
+
+  selectLetter = letter => {
+    let letters = {...this.state.letterStatus}
+    letters[letter] = true
+    this.setState({
+      letterStatus: letters
+    })
   }
 
   render() {
 
   return (
       <div>
-        {/* {this.generateLetterStatuses()} */}
-        <Score score={this.state.score}/>
-        <Solution letterStatus={this.state.letterStatus} solution={this.state.solution}/>
+        <Score score={this.state.score} key="Score"/>
+        <Solution letterStatus={this.state.letterStatus} solution={this.state.solution} key="Solution"/>
         <hr/>
-        <Letters letterStatus={this.state.letterStatus}/>
+        <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} key="Letters"/>
       </div>
     )
   }
