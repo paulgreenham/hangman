@@ -8,16 +8,42 @@ import EndGame from './Components/EndGame'
 class App extends Component {
   constructor() {
     super()
+    this.solutions = [
+      {
+        word: "CALM",
+        hint: "Your ideal mood when coding."
+      },
+      {
+        word: "SOFIA",
+        hint: "Lady Wisdom."
+      },
+      {
+        word: "ALGEBRA",
+        hint: "Analysis, not synthesis"
+      },
+      {
+        word: "DEVELOPER",
+        hint: "Creates things that have no physical reality."
+      },
+      {
+        word: "LOGIC",
+        hint: "The only way a computer thinks."
+      },
+      {
+        word: "TRIP",
+        hint: "Comes before a fall."
+      }
+    ]
     this.state = {
-      letterStatus: {},
+      letterStatus: this.generateLetterStatuses(),
       solution: {
         word: "CALM",
         hint: "Your ideal mood when coding."
       },
       score: 100,
-      gameStatus: "ongoing"
+      gameStatus: "ongoing",
+      currentSolution: 0
     }
-    this.generateLetterStatuses()
   }
 
   generateLetterStatuses() {
@@ -25,10 +51,7 @@ class App extends Component {
     for (let i = 65; i < 91; i ++) {
       letters[String.fromCharCode(i)] = false
     }
-    // this.setState({
-    //   letterStatus: letters
-    // })
-    this.state.letterStatus = {...letters}
+    return letters
   }
 
   updateScore = increase => {
@@ -66,16 +89,27 @@ class App extends Component {
     this.updateScore(this.letterInSolution(letter))
   }
 
+  reset = () => {
+    let solutionNum = this.state.currentSolution === this.solutions.length - 1 ? 0 : this.state.currentSolution + 1
+    this.setState({
+      letterStatus: this.generateLetterStatuses(),
+      solution: this.solutions[solutionNum],
+      score: 100,
+      gameStatus: "ongoing",
+      currentSolution: solutionNum
+    })
+  }
+
   render() {
 
   return (
       <div>
-        <Score score={this.state.score} key="Score"/>
-        <Solution letterStatus={this.state.letterStatus} solution={this.state.solution} key="Solution"/>
+        <Score score={this.state.score} />
+        <Solution letterStatus={this.state.letterStatus} solution={this.state.solution} />
         <hr/>
-        <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} key="Letters"/>
+        <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
         <br/>
-        {this.state.gameStatus === "ongoing" ? null : <EndGame status={this.state.gameStatus} word={this.state.solution.word}/>}
+        {this.state.gameStatus === "ongoing" ? null : <EndGame status={this.state.gameStatus} word={this.state.solution.word} reset={this.reset}/>}
       </div>
     )
   }

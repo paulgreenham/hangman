@@ -3,12 +3,23 @@ import Letter from './Letter'
 
 class Solution extends Component {
 
-    render(){
+    displayLetters = letters => {
+        const output = []
+        for (let i in letters) {
+            let l = letters[i]
+            output.push(
+                this.props.letterStatus[l] ?
+                <Letter value={l} key={l + i}/> : 
+                <span key={l + i}>_ </span>
+            )
+        }
+        return output
+    }
+
+    render() { 
         
         return (<div>
-            {this.props.solution.word.split("").map(l => this.props.letterStatus[l] ?
-            <Letter value={l} key={l}/> : 
-            <span key={l}>_ </span>)}
+            {this.displayLetters(this.props.solution.word.split(""))}
             <div><em>{this.props.solution.hint}</em></div>
         </div>)
     }
