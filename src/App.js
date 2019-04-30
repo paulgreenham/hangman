@@ -37,9 +37,7 @@ class App extends Component {
     })
   }
 
-  letterInSolution = letter => {
-    return this.state.solution.word.split("").some(l => l === letter)
-  }
+  letterInSolution = letter => this.state.solution.word.split("").some(l => l === letter)
 
   selectLetter = letter => {
     let letters = {...this.state.letterStatus}

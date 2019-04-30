@@ -1,3 +1,18 @@
 .crossed-out {
   visibility: hidden;
 }
+
+.high-score {
+  color: white;
+  background-color: green;
+}
+
+.medium-score {
+  color: black;
+  background-color: yellow;
+}
+
+.low-score {
+  color: white;
+  background-color: red;
+}
