@@ -23,7 +23,22 @@ class App extends Component {
     for (let i = 65; i < 91; i ++) {
       letters[String.fromCharCode(i)] = false
     }
+    // this.setState({
+    //   letterStatus: letters
+    // })
     this.state.letterStatus = {...letters}
+  }
+
+  updateScore = increase => {
+    let newScore = this.state.score
+    increase ? newScore += 5 : newScore -= 20
+    this.setState({
+      score: newScore
+    })
+  }
+
+  letterInSolution = letter => {
+    return this.state.solution.word.split("").some(l => l === letter)
   }
 
   selectLetter = letter => {
@@ -32,6 +47,7 @@ class App extends Component {
     this.setState({
       letterStatus: letters
     })
+    this.updateScore(this.letterInSolution(letter))
   }
 
   render() {
